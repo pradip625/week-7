@@ -1,0 +1,45 @@
+import React, { useState } from "react";
+
+function EmotionDisplay  ()  {
+  
+    const [inputText, setInputText] = useState('');
+    const [imageSrc, setImageSrc] = useState('');
+  
+    // A dictionary mapping input keywords to corresponding image URLs
+    const emojiMapping = {
+      Happy: 'https://example.com/happy.png', // Replace with the actual image URL
+      Like: 'https://example.com/like.png',  // Replace with the actual image URL
+      Sad: 'https://example.com/sad.png',   // Replace with the actual image URL
+    };
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        setInputText(value);
+    
+        // Update the image source if a valid input is given
+        const key = value.trim();
+        if (emojiMapping[key]) {
+          setImageSrc(emojiMapping[key]);
+        } else {
+          setImageSrc(''); // Clear the image if no match
+        }
+      };
+      return (
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <input
+            type="text"
+            value={inputText}
+            onChange={handleInputChange}
+            placeholder="Type Happy, Like, or Sad"
+            style={{ padding: '8px', fontSize: '16px' }}
+          />
+          <div style={{ marginTop: '20px' }}>
+            {imageSrc ? (
+              <img src={imageSrc} alt={inputText} style={{ width: '100px', height: '100px' }} />
+            ) : (
+              <p>Type a valid keyword to display an image</p>
+            )}
+          </div>
+        </div>
+      );
+};
+export default EmotionDisplay;
